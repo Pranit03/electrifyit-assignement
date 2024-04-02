@@ -72,104 +72,89 @@ const Content = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
 
       <div className="mr-8 mt-7">
         <hr className="border-slate-500" />
-        <div className="flex flex-row gap-4 mt-2">
-          <div className="border-r">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="outline-none">
-                <div className="flex flex-row gap-20">
-                  <p className="">Reports</p>
-                  <ChevronDown className="text-sm mr-6"></ChevronDown>
-                </div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-[175px] bg-[#1D1D26] border-none text-white mt-2">
-                <DropdownMenuItem className="cursor-pointer">
-                  Total Miles Driven
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  Energy Consumption
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  Cost Analysis
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+        <div className="flex justify-between items-center mr-3">
+          <div className="flex flex-row gap-4 mt-1 items-center">
+            <div className="border-r">
+              <DropdownMenu>
+                <DropdownMenuTrigger className="outline-none">
+                  <div className="flex flex-row gap-20">
+                    <p className="">Reports</p>
+                    <ChevronDown className="text-sm mr-6"></ChevronDown>
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-[175px] bg-[#1D1D26] border-none text-white mt-2">
+                  <DropdownMenuItem className="cursor-pointer">
+                    Total Miles Driven
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    Energy Consumption
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    Cost Analysis
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <div className="border-r">
+              <DropdownMenu>
+                <DropdownMenuTrigger className="outline-none">
+                  <div className="flex flex-row gap-20">
+                    <p className="">Frequency</p>
+                    <ChevronDown className="text-sm mr-6"></ChevronDown>
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-[175px] bg-[#1D1D26] border-none text-white mt-2">
+                  <DropdownMenuItem className="cursor-pointer">
+                    Daily
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    Weekly
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    Monthly
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    Yearly
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <div className="border-r">
+              <div className={cn("grid gap-2", className)}>
+                <Popover>
+                  <PopoverTrigger asChild className="border-none">
+                    <Button
+                      id="date"
+                      className={cn(
+                        "w-[220px] text-left font-normal flex justify-between",
+                      )}
+                    >
+                      <p>Time Frame</p>
+                      <ChevronDown className="text-sm"></ChevronDown>
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-[#1D1D26] text-whit mt-3" align="start">
+                    <Calendar
+                      initialFocus
+                      mode="range"
+                      defaultMonth={date?.from}
+                      selected={date}
+                      onSelect={setDate}
+                      numberOfMonths={2}
+                      className="bg-[#1D1D26] text-white"
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+            </div>
           </div>
-          <div className="border-r">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="outline-none">
-                <div className="flex flex-row gap-20">
-                  <p className="">Reports</p>
-                  <ChevronDown className="text-sm mr-6"></ChevronDown>
-                </div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-[175px] bg-[#1D1D26] border-none text-white mt-2">
-                <DropdownMenuItem className="cursor-pointer">
-                  Daily
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  Weekly
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  Monthly
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  Yearly
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          <div className="mr-6 border-r">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="outline-none">
-                <div className="flex flex-row gap-20">
-                  <p className="">Reports</p>
-                  <ChevronDown className="text-sm mr-6"></ChevronDown>
-                </div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-[175px] bg-[#1D1D26] border-none text-white mt-2">
-                <div className={cn("grid gap-2", className)}>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        id="date"
-                        variant={"outline"}
-                        className={cn(
-                          "w-[300px] justify-start text-left font-normal",
-                          !date && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date?.from ? (
-                          date.to ? (
-                            <>
-                              {format(date.from, "LLL dd, y")} -{" "}
-                              {format(date.to, "LLL dd, y")}
-                            </>
-                          ) : (
-                            format(date.from, "LLL dd, y")
-                          )
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        initialFocus
-                        mode="range"
-                        defaultMonth={date?.from}
-                        selected={date}
-                        onSelect={setDate}
-                        numberOfMonths={2}
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
+          <div className="">
+            <button> Gernrate Report</button>
           </div>
         </div>
-        <hr className="border-slate-500 mt-2" />
+
+
+        <hr className="border-slate-500 mt-1" />
       </div>
     </div>
   );
